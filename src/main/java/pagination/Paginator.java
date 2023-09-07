@@ -1,10 +1,7 @@
 package pagination;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
-
-import dto.Country;
 
 public class Paginator {
 
@@ -12,6 +9,7 @@ public class Paginator {
         if(response.equals("[]")) {
             return response;
         }
+
         Stream<String> auxiliar = Arrays.stream(response.split("},\\s?\\{")).map(x -> "{" + x + "}");
 
         return auxiliar

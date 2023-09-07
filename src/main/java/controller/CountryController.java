@@ -1,5 +1,10 @@
 package controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,11 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import dto.Country;
+import filter.FilterByName;
+
 @RestController
 public class CountryController {
 
     @Autowired
     RestTemplate restTemplate;
+
+    FilterByName filterByName = new FilterByName();
 
     @GetMapping("/getCountries")
     public ResponseEntity<String> countries(@RequestParam(value = "name", required = false) String name,
@@ -21,8 +31,12 @@ public class CountryController {
     ) {
         String uriTemplate = "https://restcountries.com/v3.1/all";
 
-        ResponseEntity<String> response = restTemplate.getForEntity(uriTemplate, String.class);
+        String response = restTemplate.getForEntity(uriTemplate, String.class).getBody();
 
-        return response;
+        if (name != null) {
+            response = filterByName.filterByName(response, name);
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

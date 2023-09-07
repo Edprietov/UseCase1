@@ -42,4 +42,9 @@ public class Country {
         this.name = name;
         this.content = content;
     }
+
+    public Country(Integer population, String content) {
+        this.population = population;
+        this.content = content;
+    }
 }

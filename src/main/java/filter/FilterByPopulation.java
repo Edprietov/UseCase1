@@ -9,7 +9,7 @@ import dto.Country;
 public class FilterByPopulation {
 
     public String filterByPopulation(String response, Integer population) {
-        Stream<String> countries = Arrays.stream(response.split("},\\{")).map(x -> "{" + x + "}");
+        Stream<String> countries = Arrays.stream(response.split("},\\s?\\{")).map(x -> "{" + x + "}");
 
         List<Country> countriesList =
             countries.map(

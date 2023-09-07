@@ -9,7 +9,7 @@ import dto.Country;
 public class SortCountries {
 
     public String sort(String response, String how) {
-        Stream<String> countries = Arrays.stream(response.split("},\\{")).map(x -> "{" + x + "}");
+        Stream<String> countries = Arrays.stream(response.split("},\\s?\\{")).map(x -> "{" + x + "}");
 
         List<Country> countriesList =
             new java.util.ArrayList<>(countries.map(

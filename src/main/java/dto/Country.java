@@ -47,4 +47,8 @@ public class Country {
         this.population = population;
         this.content = content;
     }
+
+    public Country(String content) {
+        this.content = content;
+    }
 }

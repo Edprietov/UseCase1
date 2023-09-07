@@ -9,6 +9,10 @@ import dto.Country;
 public class SortCountries {
 
     public String sort(String response, String how) {
+        if(response.equals("[]")) {
+            return response;
+        }
+
         Stream<String> countries = Arrays.stream(response.split("},\\s?\\{")).map(x -> "{" + x + "}");
 
         List<Country> countriesList =
